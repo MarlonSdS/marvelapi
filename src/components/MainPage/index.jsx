@@ -6,10 +6,13 @@ import { useEffect, useState } from 'react'
 import {MainDiv, Card, Infos, ComicName, CreatorName} from './style'
 import ComicPage from '../ComicPage'
 import Loading from '../Loading'
+import CloseButton from '../CloseButton'
 
 export default function MainPage(){
     var [comics, setComics] = useState([])
   var [loading, setLoading] = useState(true)
+  var [showPanel, setShowPanel] = useState(false)
+  var [comicInfo, setComicInfo] = useState()
   useEffect(() => {
     axios.get(Api.fullUrl).then(res => {
       setComics(res.data.data.results)
@@ -18,8 +21,20 @@ export default function MainPage(){
     })
   }, [])
 
+
   if(loading){
     return <Loading />
+  }
+
+  if(showPanel){
+    return (<>
+    <div onClick={() => {
+      setShowPanel(false)
+    }}>
+        <CloseButton />
+    </div>
+    <ComicPage id={comicInfo.id}/>
+    </>)
   }
 
   return (
@@ -30,7 +45,11 @@ export default function MainPage(){
           <Card key={comic.id}>
             <img src={comic.thumbnail.path + '/' + sizes.portrait.fantastic + formats.jpg} alt=""/>
             <Infos>
-                <ComicName>{comic.title}</ComicName>
+                <ComicName onClick={() => {
+                  setComicInfo(comic)
+                  setShowPanel(true)
+                  console.log(comicInfo.resourceURI)
+                }}>{comic.title}</ComicName>
                 <p>Autores:</p>
                 {comic.creators.items.map((creator) => {
                     return <CreatorName>{creator.name}</CreatorName>

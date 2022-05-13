@@ -7,6 +7,9 @@ export const MainDiv = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 2%;
+    @media (max-width: 1050px) {
+        grid-template-columns: 1fr 1fr;
+    }
 `
 
 export const Card = styled.div`
@@ -39,8 +42,11 @@ export const Infos = styled.div`
     }
 `
 
-export const ComicName = styled.h1`
+export const ComicName = styled.a`
     font-size: 1.5rem;
+    &:hover{
+        cursor: pointer;
+    }
 `
 
 export const CreatorName = styled.p`

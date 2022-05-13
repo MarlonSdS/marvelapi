@@ -11,6 +11,7 @@ export const hash = md5(time + privateKey + publicKey)
 
 //url principal já completa caso necessário
 export const fullUrl = `${baseUrl}?ts=${time}&apikey=${publicKey}&hash=${hash}`
+export const keyUrl = `?ts=${time}&apikey=${publicKey}&hash=${hash}`
 
 const Api = {
     baseUrl: baseUrl,
