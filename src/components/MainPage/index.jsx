@@ -3,7 +3,7 @@ import {sizes, formats} from '../../util/imageSizes'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 
-import {MainDiv, Card, Infos, ComicName, CreatorName} from './style'
+import {MainDiv, Card, Infos, ComicName, Capa} from './style'
 import ComicPage from '../ComicPage'
 import Loading from '../Loading'
 import CloseButton from '../CloseButton'
@@ -43,17 +43,14 @@ export default function MainPage(){
       comics.map((comic) => {
         return(
           <Card key={comic.id}>
-            <img src={comic.thumbnail.path + '/' + sizes.portrait.fantastic + formats.jpg} alt=""/>
+            <Capa src={comic.thumbnail.path + '/' + sizes.portrait.fantastic + formats.jpg} alt=""/>
             <Infos>
                 <ComicName onClick={() => {
                   setComicInfo(comic)
                   setShowPanel(true)
                   console.log(comicInfo.resourceURI)
                 }}>{comic.title}</ComicName>
-                <p>Autores:</p>
-                {comic.creators.items.map((creator) => {
-                    return <CreatorName>{creator.name}</CreatorName>
-                })}
+
             </Infos>
 
           </Card>
