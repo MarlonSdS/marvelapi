@@ -21,11 +21,10 @@ export default function MainPage(){
     })
   }, [])
 
-
   if(loading){
     return <Loading />
   }
-
+//se o usuário tiver clicado no título de alguma comic esta codicional exibirá a página específica dessa comic
   if(showPanel){
     return (<>
     <div onClick={() => {
